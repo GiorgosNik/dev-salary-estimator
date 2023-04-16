@@ -15,6 +15,7 @@ jobs:
       - name: Tests
         run: |
           coverage run --source='./calculator' manage.py test
+          coverage xml
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
