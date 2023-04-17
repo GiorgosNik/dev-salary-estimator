@@ -15,6 +15,7 @@ import {
   styled,
   FormControlLabel,
   Typography,
+  Grid,
 } from "@mui/material";
 
 const StyledFormControlLabel = styled(FormControlLabel)({
@@ -115,14 +116,15 @@ export default function DownloadInput(props) {
             borderColor: "secondary.main",
             borderRadius: 1.5,
           }}
-        ><Typography
-        variant="h5"
-        align="center"
-        color="secondary.main"
-        paragraph
-      >
-        Languages
-      </Typography>
+        >
+          <Typography
+            variant="h5"
+            align="center"
+            color="secondary.main"
+            paragraph
+          >
+            Languages
+          </Typography>
           <Container maxWidth="lg">
             <Stack direction="row" spacing={2} justifyContent="center">
               <FormGroup>
@@ -194,61 +196,55 @@ export default function DownloadInput(props) {
             Languages
           </Typography>
           <Container maxWidth="lg">
-            <Stack direction="row" spacing={2} justifyContent="center">
-              <FormGroup>
-                <StyledFormControlLabel control={<StyledSwitch />} label="C" />
-                <StyledFormControlLabel
-                  control={<StyledSwitch color="primary" />}
-                  label="SQL"
-                />
-                <StyledFormControlLabel
-                  control={<StyledSwitch />}
-                  label="PHP"
-                />
-                <StyledFormControlLabel
-                  control={<StyledSwitch />}
-                  label="JavaScript"
-                />
-                <StyledFormControlLabel
-                  control={<StyledSwitch />}
-                  label="Kotlin"
-                />
-              </FormGroup>
-              <FormGroup>
-                <StyledFormControlLabel
-                  control={<StyledSwitch color="primary" />}
-                  label="Python"
-                />
-                <StyledFormControlLabel
-                  control={<StyledSwitch />}
-                  label="Ruby"
-                />
-                <StyledFormControlLabel
-                  control={<StyledSwitch color="primary" />}
-                  label="Bash"
-                />
-                <StyledFormControlLabel control={<StyledSwitch />} label="Go" />
-                <StyledFormControlLabel
-                  control={<StyledSwitch />}
-                  label="Java"
-                />
-              </FormGroup>
-              <FormGroup>
-                <StyledFormControlLabel
-                  control={<StyledSwitch color="primary" />}
-                  label="Swift"
-                />
-                <StyledFormControlLabel control={<StyledSwitch />} label="C#" />
-                <StyledFormControlLabel
-                  control={<StyledSwitch color="primary" />}
-                  label="C++"
-                />
-                <StyledFormControlLabel
-                  control={<StyledSwitch />}
-                  label="TypeScript"
-                />
-              </FormGroup>
-            </Stack>
+            <Grid
+              container
+              height="18em"
+              spacing={1}
+              direction="column"
+              marginLeft="0.5em"
+              marginRight="1em"
+              justifyContent="center"
+              alignItems="flex-start"
+            >
+              <StyledFormControlLabel control={<StyledSwitch />} label="C" />
+              <StyledFormControlLabel
+                control={<StyledSwitch color="primary" />}
+                label="SQL"
+              />
+              <StyledFormControlLabel control={<StyledSwitch />} label="PHP" />
+              <StyledFormControlLabel
+                control={<StyledSwitch />}
+                label="JavaScript"
+              />
+              <StyledFormControlLabel
+                control={<StyledSwitch />}
+                label="Kotlin"
+              />
+              <StyledFormControlLabel
+                control={<StyledSwitch color="primary" />}
+                label="Python"
+              />
+              <StyledFormControlLabel control={<StyledSwitch />} label="Ruby" />
+              <StyledFormControlLabel
+                control={<StyledSwitch color="primary" />}
+                label="Bash"
+              />
+              <StyledFormControlLabel control={<StyledSwitch />} label="Go" />
+              <StyledFormControlLabel control={<StyledSwitch />} label="Java" />
+              <StyledFormControlLabel
+                control={<StyledSwitch color="primary" />}
+                label="Swift"
+              />
+              <StyledFormControlLabel control={<StyledSwitch />} label="C#" />
+              <StyledFormControlLabel
+                control={<StyledSwitch color="primary" />}
+                label="C++"
+              />
+              <StyledFormControlLabel
+                control={<StyledSwitch />}
+                label="TypeScript"
+              />
+            </Grid>
           </Container>
         </Box>
         <Stack direction="column" spacing={2} justifyContent="center">

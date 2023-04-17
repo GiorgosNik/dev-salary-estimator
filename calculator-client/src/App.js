@@ -22,7 +22,7 @@ export default function DownloadPage() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      <CssBaseline backgroundColor= "#2c2b30"/>
       <AppBar position="relative">
         <Toolbar style={{ background: "#2c2b30", height: "6vh" }}>
           <BarChartIcon sx={{ mr: 2 }} />
@@ -31,13 +31,14 @@ export default function DownloadPage() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <main> 
+      <main > 
         <Box
           sx={{
             backgroundColor: "#2c2b30",
             backgroundImage: `radial-gradient(at -120% -1000%, #d6d6d6 10%, #2c2b30 90%)`,
             pt: 3,
-            height: "100vh",
+            height: "120vh",
+            minHeight : '120vh'
           }}
         >
           <Container maxWidth="sm">
@@ -59,7 +60,7 @@ export default function DownloadPage() {
                   color="primary.contrastText"
                   paragraph
                 >
-                  The Deep-Learning powered salary calculator for developers in Greece
+                  A salary calculator for developers in Greece, based on Deep-Learning.
                 </Typography>
                 <DownloadInput
                   setRequestActive={setRequestActive}
