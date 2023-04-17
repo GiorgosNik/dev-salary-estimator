@@ -1,9 +1,8 @@
 import * as React from "react";
-import MusicVideoIcon from "@mui/icons-material/MusicVideo";
+import BarChartIcon from "@mui/icons-material/BarChart";
 import { theme } from "./theme";
-import DownloadInput from "./components/DownloadInput";
-import DownloadProgress from "./components/DownloadProgress";
-import { v4 as uuid } from "uuid";
+import DownloadInput from "./components/InputPage";
+import DownloadProgress from "./components/ResultPage";
 import { mountedStyle, unmountedStyle } from "./animations.js";
 
 import {
@@ -17,17 +16,18 @@ import {
 } from "@mui/material";
 
 export default function DownloadPage() {
-  const [uniqueUserID] = React.useState(uuid());
-  var [downloadActive, setDownloadActive] = React.useState(false);
+  var [requestActive, setRequestActive] = React.useState(false);
+  var [responseReceived, setResponseReceived] = React.useState(false);
+  var [result, setResult] = React.useState(0);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar style={{ background: "#2c2b30", height: "6vh" }}>
-          <MusicVideoIcon sx={{ mr: 2 }} />
+          <BarChartIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-            Spotube
+            Salary Calculator
           </Typography>
         </Toolbar>
       </AppBar>
@@ -48,30 +48,32 @@ export default function DownloadPage() {
               color="secondary"
               gutterBottom
             >
-              Spotube
+              IT Salary Calculator
             </Typography>
 
-            <Typography
-              variant="h5"
-              align="center"
-              color="primary.contrastText"
-              paragraph
-            >
-              The Spotify Downloader
-            </Typography>
-            {downloadActive === false && (
-              <div style={downloadActive ? unmountedStyle : mountedStyle}>
+            {requestActive === false && (
+              <div style={requestActive ? unmountedStyle : mountedStyle}>
+                <Typography
+                  variant="h5"
+                  align="center"
+                  color="primary.contrastText"
+                  paragraph
+                >
+                  The Deep-Learning powered salary calculator for developers in Greece
+                </Typography>
                 <DownloadInput
-                  setDownloadActive={setDownloadActive}
-                  uniqueUserID={uniqueUserID}
+                  setRequestActive={setRequestActive}
+                  setResponseReceived={setResponseReceived}
+                  setResult={setResult}
                 />
               </div>
             )}
-            {downloadActive === true && (
-              <div style={downloadActive ? mountedStyle : unmountedStyle}>
+            {requestActive === true && (
+              <div style={requestActive ? mountedStyle : unmountedStyle}>
                 <DownloadProgress
-                  setDownloadActive={setDownloadActive}
-                  uniqueUserID={uniqueUserID}
+                  setRequestActive={setRequestActive}
+                  responseReceived={responseReceived}
+                  result={result}
                 />
               </div>
             )}

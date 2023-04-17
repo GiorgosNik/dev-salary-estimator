@@ -9,17 +9,17 @@ export const theme = createTheme({
       contrastText: "#f8f4f4",
     },
     secondary: {
-      light: "#f8f4f4",
-      main: "#f58f7c",
+      light: "#42f5b3",
+      main: "#42f5b3",
     },
     dark_button: {
       light: "#d6d6d6",
       main: "#181818",
       dark: "#2c2b30",
-      contrastText: "#f58f7c",
+      contrastText: "#42f5b3",
     },
     light_button: {
-      main: "#f58f7c",
+      main: "#42f5b3",
     },
   },
 });

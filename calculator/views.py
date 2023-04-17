@@ -12,7 +12,7 @@ class UseModel(APIView):
 
     def post(self, request):
         input = {
-            "years_experience": request.data["years_experience"],
+            "years_experience": int(request.data["years_experience"]),
             "company_size_xf": request.data["company_size"],
             "education_xf": request.data["education"],
             "relevant_xf": request.data["relevant"],
@@ -49,4 +49,5 @@ class UseModel(APIView):
         input = {k: [v] for k, v in input.items()}
 
         prediction = model(input).numpy()[0][0]
+        prediction = str(prediction).split(".")[0]
         return Response({"prediction": prediction})

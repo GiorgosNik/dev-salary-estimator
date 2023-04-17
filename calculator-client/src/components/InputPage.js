@@ -4,7 +4,6 @@ import { theme } from "../theme";
 import { DropdownMenu } from "./DropdownMenu";
 import { StyledTextField } from "../styledComponents/StyledTextField";
 import { StyledArrowIconButton } from "../styledComponents/StyledArrowIconButton";
-import { validateLinkFormat } from "../utils/urlValidator";
 import { backend } from "../urls";
 
 import {
@@ -19,19 +18,16 @@ import {
 
 export default function DownloadInput(props) {
   var [checked, setChecked] = React.useState(false);
-  var [playlist_link, setPlaylistLink] = React.useState("");
+  var [yearsExperience, setYearsExperience] = React.useState("");
   var [inputErrorMessage, setInputErrorMessage] = React.useState("");
 
   const handleArrowButtonClick = () => {
     setChecked((prev) => !prev);
   };
 
-  const validateURL = () => {
-    if (playlist_link.trim() === "") {
-      setInputErrorMessage("The playlist URL cannot be empty");
-      return false;
-    } else if (!validateLinkFormat(playlist_link)) {
-      setInputErrorMessage("Invalid URL");
+  const validateInput = () => {
+    if (yearsExperience.trim() === "") {
+      setInputErrorMessage("The experience field cannot be empty");
       return false;
     } else {
       setInputErrorMessage("");
@@ -39,13 +35,44 @@ export default function DownloadInput(props) {
     }
   };
 
-  const sendDownloadRequest = () => {
-    if (validateURL()) {
+  const sendCalculationRequest = () => {
+    if (validateInput()) {
+      props.setRequestActive(true);
       const requestOptions = {
         method: "POST",
         body: JSON.stringify({
-          playlist_link: playlist_link,
-          user_id: props.uniqueUserID,
+          years_experience: yearsExperience,
+          company_size: "11-50",
+          education: "Bachelor's",
+          relevant: "Ναι",
+          personal_projects: "Ναι",
+          remote: "Και τα δύο",
+          supervisor: "Ναι",
+          sex: "Άντρας",
+          Backend: 1,
+          Desktopapps: 0,
+          DevOps: 0,
+          "AI/ML": 0,
+          BI: 0,
+          Cybersecurity: 0,
+          Embedded: 0,
+          Gaming: 0,
+          Frontend: 1,
+          Mobileapps: 0,
+          C: 0,
+          SQL: 0,
+          PHP: 0,
+          JavaScript: 1,
+          Kotlin: 0,
+          TypeScript: 0,
+          Python: 1,
+          Ruby: 0,
+          Bash: 0,
+          Go: 0,
+          Java: 0,
+          Swift: 0,
+          Csharp: 0,
+          Cpp: 0,
         }),
         headers: { "Content-Type": "application/json" },
       };
@@ -53,7 +80,8 @@ export default function DownloadInput(props) {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          props.setDownloadActive(true);
+          props.setResult(data.prediction);
+          props.setResponseReceived(true);
         })
         .catch((err) => {
           console.log(err.message);
@@ -69,9 +97,12 @@ export default function DownloadInput(props) {
           error={!(inputErrorMessage === "")}
           inputProps={{ spellCheck: "false" }}
           helperText={inputErrorMessage}
-          label="Link To Playlist"
+          label="Years of Experience"
           variant="outlined"
-          onChange={(e) => {setPlaylistLink(e.target.value); setInputErrorMessage("");} }
+          onChange={(e) => {
+            setYearsExperience(e.target.value);
+            setInputErrorMessage("");
+          }}
           fullWidth
           autoComplete="off"
           InputProps={{ style: { color: theme.palette.primary.light } }}
@@ -87,13 +118,9 @@ export default function DownloadInput(props) {
             <Button
               color="dark_button"
               variant="contained"
-              onClick={sendDownloadRequest}
+              onClick={sendCalculationRequest}
             >
-              Download Playlist
-            </Button>
-
-            <Button color="light_button" variant="outlined">
-              Validate Playlist
+              Calculate Salary
             </Button>
             <StyledArrowIconButton onClick={handleArrowButtonClick}>
               <KeyboardArrowDownIcon />
