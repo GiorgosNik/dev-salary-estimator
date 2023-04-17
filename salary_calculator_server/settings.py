@@ -47,7 +47,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
+    "http://localhost:3000",
+    "https://giorgosnik.github.io",
 ]
 
 ROOT_URLCONF = "salary_calculator_server.urls"
@@ -69,10 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "salary_calculator_server.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     "default": {
