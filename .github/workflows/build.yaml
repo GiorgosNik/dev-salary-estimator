@@ -1,5 +1,7 @@
 name: Build
 on: push
+env:
+  DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY}}
 jobs:
   sonarcloud:
     name: SonarCloud
