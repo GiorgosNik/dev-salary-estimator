@@ -1,10 +1,8 @@
 import * as React from "react";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { theme } from "../theme";
-import { DropdownMenu } from "./DropdownMenu";
 import { StyledTextField } from "../styledComponents/StyledTextField";
-import { StyledArrowIconButton } from "../styledComponents/StyledArrowIconButton";
 import { backend } from "../urls";
+import { StyledSwitch } from "../styledComponents/StyledSwitch";
 
 import {
   Button,
@@ -12,18 +10,20 @@ import {
   Stack,
   Box,
   Container,
-  Collapse,
   ThemeProvider,
+  FormGroup,
+  styled,
+  FormControlLabel,
+  Typography,
 } from "@mui/material";
 
+const StyledFormControlLabel = styled(FormControlLabel)({
+  color: theme.palette.secondary.main,
+});
+
 export default function DownloadInput(props) {
-  var [checked, setChecked] = React.useState(false);
   var [yearsExperience, setYearsExperience] = React.useState("");
   var [inputErrorMessage, setInputErrorMessage] = React.useState("");
-
-  const handleArrowButtonClick = () => {
-    setChecked((prev) => !prev);
-  };
 
   const validateInput = () => {
     if (yearsExperience.trim() === "") {
@@ -107,7 +107,150 @@ export default function DownloadInput(props) {
           autoComplete="off"
           InputProps={{ style: { color: theme.palette.primary.light } }}
         />
-
+        <Box
+          sx={{
+            border: 1,
+            marginTop: "1em",
+            backgroundColor: "primary.dark",
+            borderColor: "secondary.main",
+            borderRadius: 1.5,
+          }}
+        ><Typography
+        variant="h5"
+        align="center"
+        color="secondary.main"
+        paragraph
+      >
+        Languages
+      </Typography>
+          <Container maxWidth="lg">
+            <Stack direction="row" spacing={2} justifyContent="center">
+              <FormGroup>
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="Backend Development"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch color="primary" />}
+                  label="Frontend Development"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="Desktop Apps"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="Business Intelligence"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="Embedded Systems"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="Mobile Development"
+                />
+              </FormGroup>
+              <FormGroup>
+                <StyledFormControlLabel
+                  control={<StyledSwitch color="primary" />}
+                  label="DevOps"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="A.I. / Machine Learning"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch color="primary" />}
+                  label="DevOps"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="Cybersecurity"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="Gaming"
+                />
+              </FormGroup>
+            </Stack>
+          </Container>
+        </Box>
+        <Box
+          sx={{
+            border: 1,
+            marginTop: "1em",
+            backgroundColor: "primary.dark",
+            borderColor: "secondary.main",
+            borderRadius: 1.5,
+          }}
+        >
+          <Typography
+            variant="h5"
+            align="center"
+            color="secondary.main"
+            paragraph
+          >
+            Languages
+          </Typography>
+          <Container maxWidth="lg">
+            <Stack direction="row" spacing={2} justifyContent="center">
+              <FormGroup>
+                <StyledFormControlLabel control={<StyledSwitch />} label="C" />
+                <StyledFormControlLabel
+                  control={<StyledSwitch color="primary" />}
+                  label="SQL"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="PHP"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="JavaScript"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="Kotlin"
+                />
+              </FormGroup>
+              <FormGroup>
+                <StyledFormControlLabel
+                  control={<StyledSwitch color="primary" />}
+                  label="Python"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="Ruby"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch color="primary" />}
+                  label="Bash"
+                />
+                <StyledFormControlLabel control={<StyledSwitch />} label="Go" />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="Java"
+                />
+              </FormGroup>
+              <FormGroup>
+                <StyledFormControlLabel
+                  control={<StyledSwitch color="primary" />}
+                  label="Swift"
+                />
+                <StyledFormControlLabel control={<StyledSwitch />} label="C#" />
+                <StyledFormControlLabel
+                  control={<StyledSwitch color="primary" />}
+                  label="C++"
+                />
+                <StyledFormControlLabel
+                  control={<StyledSwitch />}
+                  label="TypeScript"
+                />
+              </FormGroup>
+            </Stack>
+          </Container>
+        </Box>
         <Stack direction="column" spacing={2} justifyContent="center">
           <Stack
             sx={{ pt: 4 }}
@@ -117,19 +260,13 @@ export default function DownloadInput(props) {
           >
             <Button
               color="dark_button"
+              marginBottom="2em"
               variant="contained"
               onClick={sendCalculationRequest}
             >
               Calculate Salary
             </Button>
-            <StyledArrowIconButton onClick={handleArrowButtonClick}>
-              <KeyboardArrowDownIcon />
-            </StyledArrowIconButton>
           </Stack>
-
-          <Container>
-            <Collapse in={checked}>{DropdownMenu}</Collapse>
-          </Container>
         </Stack>
       </Box>
     </ThemeProvider>

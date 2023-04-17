@@ -31,13 +31,13 @@ export default function DownloadPage() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <main>
+      <main> 
         <Box
           sx={{
             backgroundColor: "#2c2b30",
             backgroundImage: `radial-gradient(at -120% -1000%, #d6d6d6 10%, #2c2b30 90%)`,
-            pt: 8,
-            height: "93.2vh",
+            pt: 3,
+            height: "100vh",
           }}
         >
           <Container maxWidth="sm">
