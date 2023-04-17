@@ -1,14 +1,18 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.shortcuts import redirect
 from tensorflow import keras
 
 model = keras.models.load_model("./model")
 
 
 class UseModel(APIView):
+    def get(self, request):
+        return redirect("https://giorgosnik.github.io/dev-salary-estimator/")
+
     def post(self, request):
         input = {
-            "years_experience": request.data["years_experience"],
+            "years_experience": int(request.data["years_experience"]),
             "company_size_xf": request.data["company_size"],
             "education_xf": request.data["education"],
             "relevant_xf": request.data["relevant"],
@@ -45,4 +49,5 @@ class UseModel(APIView):
         input = {k: [v] for k, v in input.items()}
 
         prediction = model(input).numpy()[0][0]
+        prediction = str(prediction).split(".")[0]
         return Response({"prediction": prediction})
