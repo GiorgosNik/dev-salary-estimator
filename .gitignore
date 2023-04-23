@@ -134,3 +134,6 @@ dmypy.json
 # Model files
 *.h5
 logs
+
+# Coverage results
+xunit-result.xml
