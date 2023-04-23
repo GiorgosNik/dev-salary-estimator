@@ -10,9 +10,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     try:
         req_body = req.get_json()
     except ValueError:
-        return func.HttpResponse(f"Incorrect input format")
+        return func.HttpResponse("Incorrect input format")
 
-    input = {
+    model_input = {
         "years_experience": req_body.get("years_experience"),
         "company_size_xf": "11-50",
         "education_xf": "Bachelor's",
@@ -47,8 +47,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         "languages_Cpp": req_body.get("cpp"),
     }
 
-    input = {k: [v] for k, v in input.items()}
+    model_input = {k: [v] for k, v in model_input.items()}
 
-    prediction = model(input).numpy()[0][0]
+    prediction = model(model_input).numpy()[0][0]
     prediction = str(prediction).split(".")[0]
     return func.HttpResponse(f"You make, {prediction} per year")
