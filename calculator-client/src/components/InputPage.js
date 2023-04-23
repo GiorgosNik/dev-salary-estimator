@@ -42,7 +42,7 @@ export default function DownloadInput(props) {
       const requestOptions = {
         method: "POST",
         body: JSON.stringify({
-          years_experience: yearsExperience,
+          years_experience: parseInt(yearsExperience),
           company_size: "11-50",
           education: "Bachelor's",
           relevant: "Ναι",
@@ -52,7 +52,7 @@ export default function DownloadInput(props) {
           sex: "Άντρας",
           backend: 1,
           desktopapps: 0,
-          devops: 0,
+          devOps: 0,
           ai: 0,
           bi: 0,
           cybersecurity: 0,
@@ -256,7 +256,6 @@ export default function DownloadInput(props) {
           >
             <Button
               color="dark_button"
-              marginBottom="2em"
               variant="contained"
               onClick={sendCalculationRequest}
             >
