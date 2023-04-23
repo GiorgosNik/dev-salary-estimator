@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/dev-salary-estimator/static/css/main.0d18c856.css",
-    "main.js": "/dev-salary-estimator/static/js/main.f44e3c8d.js",
+    "main.js": "/dev-salary-estimator/static/js/main.8b7aeac3.js",
     "index.html": "/dev-salary-estimator/index.html",
     "main.0d18c856.css.map": "/dev-salary-estimator/static/css/main.0d18c856.css.map",
-    "main.f44e3c8d.js.map": "/dev-salary-estimator/static/js/main.f44e3c8d.js.map"
+    "main.8b7aeac3.js.map": "/dev-salary-estimator/static/js/main.8b7aeac3.js.map"
   },
   "entrypoints": [
     "static/css/main.0d18c856.css",
-    "static/js/main.f44e3c8d.js"
+    "static/js/main.8b7aeac3.js"
   ]
 }
