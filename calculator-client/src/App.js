@@ -37,8 +37,8 @@ export default function DownloadPage() {
             backgroundColor: "#2c2b30",
             backgroundImage: `radial-gradient(at -120% -1000%, #d6d6d6 10%, #2c2b30 90%)`,
             pt: 3,
-            height: "120vh",
-            minHeight : '120vh'
+            height: "150vh",
+            minHeight : '150vh'
           }}
         >
           <Container maxWidth="sm">
