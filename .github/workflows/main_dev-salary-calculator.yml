@@ -34,8 +34,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         
-      # Optional: Add step to run tests here
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
