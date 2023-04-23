@@ -1,6 +1,7 @@
 import azure.functions as func
 from tensorflow import keras
 from pathlib import Path
+import json
 
 path = Path(__file__).parent.parent / "./model"
 model = keras.models.load_model(path)
@@ -51,4 +52,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     prediction = model(model_input).numpy()[0][0]
     prediction = str(prediction).split(".")[0]
-    return func.HttpResponse(f"You make, {prediction} per year")
+    return func.HttpResponse(json.dumps({"prediction": prediction}))
