@@ -1,15 +1,12 @@
 import * as React from "react";
-import BarChartIcon from "@mui/icons-material/BarChart";
 import { theme } from "./theme";
 import DownloadInput from "./components/InputPage";
 import DownloadProgress from "./components/ResultPage";
 import { mountedStyle, unmountedStyle } from "./animations.js";
 
 import {
-  AppBar,
   CssBaseline,
   Box,
-  Toolbar,
   Typography,
   Container,
   ThemeProvider,
@@ -22,23 +19,14 @@ export default function DownloadPage() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline backgroundColor= "#2c2b30"/>
-      <AppBar position="relative">
-        <Toolbar style={{ background: "#2c2b30", height: "6vh" }}>
-          <BarChartIcon sx={{ mr: 2 }} />
-          <Typography variant="h6" color="inherit" noWrap>
-            Salary Calculator
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <main > 
+      <CssBaseline backgroundColor="#2c2b30" />
+      <main>
         <Box
           sx={{
             backgroundColor: "#2c2b30",
             backgroundImage: `radial-gradient(at -120% -1000%, #d6d6d6 10%, #2c2b30 90%)`,
             pt: 3,
-            height: "150vh",
-            minHeight : '150vh'
+            minHeight: "100vh",
           }}
         >
           <Container maxWidth="sm">
@@ -60,7 +48,8 @@ export default function DownloadPage() {
                   color="primary.contrastText"
                   paragraph
                 >
-                  A salary calculator for developers in Greece, based on Deep-Learning.
+                  A salary calculator for developers in Greece, based on
+                  Deep-Learning.
                 </Typography>
                 <DownloadInput
                   setRequestActive={setRequestActive}
@@ -73,6 +62,7 @@ export default function DownloadPage() {
               <div style={requestActive ? mountedStyle : unmountedStyle}>
                 <DownloadProgress
                   setRequestActive={setRequestActive}
+                  setResponseReceived={setResponseReceived}
                   responseReceived={responseReceived}
                   result={result}
                 />

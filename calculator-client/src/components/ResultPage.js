@@ -15,6 +15,7 @@ import {
 
 export default function DownloadProgress(props) {
   const handleCancelClick = () => {
+    props.setResponseReceived(false);
     props.setRequestActive(false);
   };
   return (
