@@ -13,8 +13,14 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     except ValueError:
         return func.HttpResponse("Incorrect input format")
 
+    years_experience = req_body.get("years_experience")
+    if years_experience < 0:
+        years_experience = 0
+    if years_experience > 100:
+        years_experience = 100
+
     model_input = {
-        "years_experience": req_body.get("years_experience"),
+        "years_experience": years_experience,
         "company_size_xf": "11-50",
         "education_xf": "Bachelor's",
         "relevant_xf": "Ναι",
