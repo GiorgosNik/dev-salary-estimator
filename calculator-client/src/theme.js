@@ -11,6 +11,7 @@ export const theme = createTheme({
     secondary: {
       light: "#42f5b3",
       main: "#42f5b3",
+      dark: "#37cc95",
     },
     dark_button: {
       light: "#d6d6d6",

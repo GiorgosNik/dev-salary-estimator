@@ -48,7 +48,7 @@ export default function LoadingCircle(props) {
         </Box>
       </div>
       <Typography align="center" color="primary.contrastText" paragraph>
-        Waiting for server.
+        Waiting for server. This might take a while...
       </Typography>
     </Stack>
   );
