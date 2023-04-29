@@ -23,32 +23,32 @@ const StyledFormControlLabel = styled(FormControlLabel)({
 });
 
 export default function DownloadInput(props) {
-  var [yearsExperience, setYearsExperience] = React.useState("");
-  var [backend, setBackend] = React.useState(false);
-  var [desktopapps, setDesktopapps] = React.useState(false);
-  var [devops, setDevOps] = React.useState(false);
-  var [ai, setAi] = React.useState(false);
-  var [bi, setBi] = React.useState(false);
-  var [cybersecurity, setCybersecurity] = React.useState(false);
-  var [embedded, setEmbedded] = React.useState(false);
-  var [gaming, setGaming] = React.useState(false);
-  var [frontend, setFrontend] = React.useState(false);
-  var [mobileapps, setMobileapps] = React.useState(false);
-  var [c, setC] = React.useState(false);
-  var [sql, setSql] = React.useState(false);
-  var [php, setPhp] = React.useState(false);
-  var [javascript, setJavascript] = React.useState(false);
-  var [kotlin, setKotlin] = React.useState(false);
-  var [typescript, setTypescript] = React.useState(false);
-  var [python, setPython] = React.useState(false);
-  var [ruby, setRuby] = React.useState(false);
-  var [bash, setBash] = React.useState(false);
-  var [go, setGo] = React.useState(false);
-  var [java, setJava] = React.useState(false);
-  var [swift, setSwift] = React.useState(false);
-  var [csharp, setCsharp] = React.useState(false);
-  var [cpp, setCpp] = React.useState(false);
-  var [inputErrorMessage, setInputErrorMessage] = React.useState("");
+  const [yearsExperience, setYearsExperience] = React.useState("");
+  const [backend, setBackend] = React.useState(false);
+  const [desktopapps, setDesktopapps] = React.useState(false);
+  const [devops, setDevOps] = React.useState(false);
+  const [ai, setAi] = React.useState(false);
+  const [bi, setBi] = React.useState(false);
+  const [cybersecurity, setCybersecurity] = React.useState(false);
+  const [embedded, setEmbedded] = React.useState(false);
+  const [gaming, setGaming] = React.useState(false);
+  const [frontend, setFrontend] = React.useState(false);
+  const [mobileapps, setMobileapps] = React.useState(false);
+  const [c, setC] = React.useState(false);
+  const [sql, setSql] = React.useState(false);
+  const [php, setPhp] = React.useState(false);
+  const [javascript, setJavascript] = React.useState(false);
+  const [kotlin, setKotlin] = React.useState(false);
+  const [typescript, setTypescript] = React.useState(false);
+  const [python, setPython] = React.useState(false);
+  const [ruby, setRuby] = React.useState(false);
+  const [bash, setBash] = React.useState(false);
+  const [go, setGo] = React.useState(false);
+  const [java, setJava] = React.useState(false);
+  const [swift, setSwift] = React.useState(false);
+  const [csharp, setCsharp] = React.useState(false);
+  const [cpp, setCpp] = React.useState(false);
+  const [inputErrorMessage, setInputErrorMessage] = React.useState("");
 
   const validateInput = () => {
     if (yearsExperience.trim() === "") {
