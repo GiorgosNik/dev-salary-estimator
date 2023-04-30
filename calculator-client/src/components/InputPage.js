@@ -3,6 +3,10 @@ import { theme } from "../theme";
 import { StyledTextField } from "../styledComponents/StyledTextField";
 import { server_url } from "../urls";
 import CustomCheckbox from "./CustomCheckbox";
+import CustomSelect from "./CustomRadio";
+import normalizeHybrid from "../normalizers/normalizeHybrid";
+import normalizeEducation from "../normalizers/normalizeEducation";
+import normalizeSize from "../normalizers/normalizeSize";
 
 import {
   Button,
@@ -46,6 +50,9 @@ export default function DownloadInput(props) {
   const [personalProjects, setPersonalProjects] = React.useState(false);
   const [supervisor, setSupervisor] = React.useState(false);
   const [inputErrorMessage, setInputErrorMessage] = React.useState("");
+  const [education, setEducation] = React.useState("Secondary School");
+  const [hybrid, setHybrid] = React.useState("Hybrid");
+  const [size, setSize] = React.useState("11 to 50");
 
   const validateInput = () => {
     if (yearsExperience.trim() === "") {
@@ -59,17 +66,18 @@ export default function DownloadInput(props) {
   const sendCalculationRequest = () => {
     if (validateInput()) {
       props.setRequestActive(true);
+      normalizeHybrid();
+      normalizeEducation();
       const requestOptions = {
         method: "POST",
         body: JSON.stringify({
           years_experience: parseInt(yearsExperience),
-          company_size: "11-50",
-          education: "Bachelor's",
-          relevant: relevantStudies,
-          personal_projects: personalProjects,
-          remote: "Και τα δύο",
-          supervisor: supervisor,
-          sex: "Άντρας",
+          company_size: normalizeSize(size),
+          education: normalizeEducation(education),
+          relevant: relevantStudies ? "Ναι" : "Όχι",
+          personal_projects: personalProjects ? "Ναι" : "Όχι",
+          remote: normalizeHybrid(hybrid),
+          supervisor: supervisor ? "Ναι" : "Όχι",
           backend: backend,
           desktopapps: desktopapps,
           devOps: devops,
@@ -85,7 +93,7 @@ export default function DownloadInput(props) {
           php: php,
           javascript: javascript,
           kotlin: kotlin,
-          typescript: javascript,
+          typescript: typescript,
           python: python,
           ruby: ruby,
           bash: bash,
@@ -96,11 +104,44 @@ export default function DownloadInput(props) {
           cpp: cpp,
         }),
         headers: { "Content-Type": "application/json" },
+        // body: JSON.stringify({
+        //   years_experience: parseInt(yearsExperience),
+        //   company_size: normalizeSize(size),
+        //   education: normalizeEducation(education),
+        //   relevant: relevantStudies ? "Ναι" : "Όχι",
+        //   personal_projects: personalProjects ? "Ναι" : "Όχι",
+        //   remote: normalizeHybrid(hybrid),
+        //   supervisor: supervisor ? "Ναι" : "Όχι",
+        //   backend: backend,
+        //   desktopapps: desktopapps,
+        //   devOps: devops,
+        //   ai: ai,
+        //   bi: bi,
+        //   cybersecurity: cybersecurity,
+        //   embedded: embedded,
+        //   gaming: gaming,
+        //   frontend: frontend,
+        //   mobileapps: mobileapps,
+        //   c: c,
+        //   sql: sql,
+        //   php: php,
+        //   javascript: javascript,
+        //   kotlin: kotlin,
+        //   typescript: javascript,
+        //   python: python,
+        //   ruby: ruby,
+        //   bash: bash,
+        //   go: go,
+        //   java: java,
+        //   swift: swift,
+        //   csharp: csharp,
+        //   cpp: cpp,
+        // }),
+        // headers: { "Content-Type": "application/json" },
       };
       fetch(server_url, requestOptions)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           props.setResult(data.prediction);
           props.setResponseReceived(true);
         })
@@ -246,7 +287,7 @@ export default function DownloadInput(props) {
           <Container maxWidth="lg">
             <Grid
               container
-              height="9em"
+              height="15em"
               spacing={1}
               direction="column"
               marginLeft="0.5em"
@@ -308,31 +349,94 @@ export default function DownloadInput(props) {
           <Container maxWidth="lg">
             <Grid
               container
-              height="18em"
               spacing={1}
-              direction="column"
+              direction="row"
               marginLeft="0.5em"
               marginRight="1em"
-              justifyContent="center"
+              justifyContent="start"
               alignItems="flex-start"
             >
-              <CustomCheckbox
-                title={"Supervisor"}
-                subtitle={"Do you supervise others?"}
-                value={supervisor}
-                handle={setSupervisor}
+              <CustomSelect
+                options={[
+                  "None",
+                  "Secondary School",
+                  "Technical School",
+                  "Bachelor's",
+                  "Master's",
+                  "PhD",
+                ]}
+                title={"Education Level"}
+                handle={setEducation}
               />
-              <CustomCheckbox
-                title={"Relevant Studies"}
-                subtitle={"Are your studies relevant?"}
-                value={relevantStudies}
-                handle={setRelevantStudies}
+              <Box sx={{ width: "40vw", maxWidth: "300px" }} direction="column">
+                <CustomCheckbox
+                  title={"Supervisor"}
+                  subtitle={"Do you supervise others?"}
+                  value={supervisor}
+                  handle={setSupervisor}
+                />
+                <CustomCheckbox
+                  title={"Relevant Studies"}
+                  subtitle={
+                    "Are your studies relevant to your job description?"
+                  }
+                  value={relevantStudies}
+                  handle={setRelevantStudies}
+                />
+                <CustomCheckbox
+                  title={"Personal Projects"}
+                  subtitle={"Do you display relevant projects in e.g. Github?"}
+                  value={personalProjects}
+                  handle={setPersonalProjects}
+                />
+              </Box>
+            </Grid>
+          </Container>
+        </Box>
+        <Box
+          sx={{
+            border: 1,
+            marginTop: "1em",
+            marginBottom: "1em",
+            backgroundColor: "primary.dark",
+            borderColor: "secondary.main",
+            borderRadius: 1.5,
+          }}
+        >
+          <Typography
+            variant="h5"
+            align="center"
+            color="secondary.main"
+            paragraph
+          >
+            Company Profile
+          </Typography>
+          <Container maxWidth="lg">
+            <Grid
+              container
+              spacing={1}
+              direction="row"
+              marginLeft="0.5em"
+              marginRight="1em"
+              justifyContent="space-around"
+              alignItems="flex-start"
+            >
+              <CustomSelect
+                options={["Company Office", "Work from Home", "Hybrid"]}
+                title={"Work Location"}
+                handle={setHybrid}
               />
-              <CustomCheckbox
-                title={"Personal Projects"}
-                subtitle={"Have you worked on personal projects?"}
-                value={personalProjects}
-                handle={setPersonalProjects}
+              <CustomSelect
+                options={[
+                  "Less than 10",
+                  "11 to 50",
+                  "51 to 100",
+                  "101 to 200",
+                  "201 to 500",
+                  "More than 501",
+                ]}
+                title={"Company Size"}
+                handle={setSize}
               />
             </Grid>
           </Container>
