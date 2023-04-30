@@ -29,7 +29,7 @@ export default function DownloadPage() {
             minHeight: "100vh",
           }}
         >
-          <Container maxWidth="sm">
+          <Container>
             <Typography
               component="h1"
               variant="h2"
@@ -71,7 +71,6 @@ export default function DownloadPage() {
           </Container>
         </Box>
 
-        <Container maxWidth="md"></Container>
       </main>
     </ThemeProvider>
   );
