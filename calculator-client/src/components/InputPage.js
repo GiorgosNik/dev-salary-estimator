@@ -3,6 +3,10 @@ import { theme } from "../theme";
 import { StyledTextField } from "../styledComponents/StyledTextField";
 import { server_url } from "../urls";
 import CustomCheckbox from "./CustomCheckbox";
+import CustomSelect from "./CustomRadio";
+import normalizeHybrid from "../normalizers/normalizeHybrid";
+import normalizeEducation from "../normalizers/normalizeEducation";
+import normalizeSize from "../normalizers/normalizeSize";
 
 import {
   Button,
@@ -46,6 +50,9 @@ export default function DownloadInput(props) {
   const [personalProjects, setPersonalProjects] = React.useState(false);
   const [supervisor, setSupervisor] = React.useState(false);
   const [inputErrorMessage, setInputErrorMessage] = React.useState("");
+  const [education, setEducation] = React.useState("Secondary School");
+  const [hybrid, setHybrid] = React.useState("Hybrid");
+  const [size, setSize] = React.useState("11 to 50");
 
   const validateInput = () => {
     if (yearsExperience.trim() === "") {
@@ -63,13 +70,12 @@ export default function DownloadInput(props) {
         method: "POST",
         body: JSON.stringify({
           years_experience: parseInt(yearsExperience),
-          company_size: "11-50",
-          education: "Bachelor's",
-          relevant: relevantStudies,
-          personal_projects: personalProjects,
-          remote: "Και τα δύο",
-          supervisor: supervisor,
-          sex: "Άντρας",
+          company_size: normalizeSize(size),
+          education: normalizeEducation(education),
+          relevant: relevantStudies ? "Ναι" : "Όχι",
+          personal_projects: personalProjects ? "Ναι" : "Όχι",
+          remote: normalizeHybrid(hybrid),
+          supervisor: supervisor ? "Ναι" : "Όχι",
           backend: backend,
           desktopapps: desktopapps,
           devOps: devops,
@@ -85,7 +91,7 @@ export default function DownloadInput(props) {
           php: php,
           javascript: javascript,
           kotlin: kotlin,
-          typescript: javascript,
+          typescript: typescript,
           python: python,
           ruby: ruby,
           bash: bash,
@@ -100,7 +106,6 @@ export default function DownloadInput(props) {
       fetch(server_url, requestOptions)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           props.setResult(data.prediction);
           props.setResponseReceived(true);
         })
@@ -114,10 +119,11 @@ export default function DownloadInput(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box>
+      <Container maxWidth="lg">
         <Stack
-          sx={{ pt: 4 }}
+          sx={{ pt: 4, pr:1,pl:1 }}
           direction="row"
-          spacing={2}
+          spacing={5.3}
           justifyContent="center"
         >
           <StyledTextField
@@ -144,199 +150,294 @@ export default function DownloadInput(props) {
             Calculate Salary
           </Button>
         </Stack>
-        <Box
-          sx={{
-            border: 1,
-            marginTop: "1em",
-            backgroundColor: "primary.dark",
-            borderColor: "secondary.main",
-            borderRadius: 1.5,
-          }}
+        </Container>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-evenly"
+          alignItems="stretch"
+          columnSpacing={1}
         >
-          <Typography
-            variant="h5"
-            align="center"
-            color="secondary.main"
-            paragraph
+          <Box // Developer Type
+            sx={{
+              border: 1,
+              height: "100%",
+              width: "45%",
+              minWidth: "400px",
+              marginTop: "1em",
+              backgroundColor: "primary.dark",
+              borderColor: "secondary.main",
+              borderRadius: 1.5,
+            }}
           >
-            Developer Type
-          </Typography>
-          <Container maxWidth="lg">
-            <Stack direction="row" spacing={2} justifyContent="center">
-              <FormGroup>
-                <CustomCheckbox
-                  title={"Backend Development"}
-                  value={backend}
-                  handle={setBackend}
-                />
-                <CustomCheckbox
-                  title={"Frontend Development"}
-                  value={frontend}
-                  handle={setFrontend}
-                />
-                <CustomCheckbox
-                  title={"Backend"}
-                  value={desktopapps}
-                  handle={setDesktopapps}
-                />
-                <CustomCheckbox
-                  title={"Desktop Apps"}
-                  value={backend}
-                  handle={setBackend}
-                />
-                <CustomCheckbox
-                  title={"Business Intelligence"}
-                  value={bi}
-                  handle={setBi}
-                />
-                <CustomCheckbox
-                  title={"Embedded Systems"}
-                  value={embedded}
-                  handle={setEmbedded}
-                />
-              </FormGroup>
-              <FormGroup>
-                <CustomCheckbox
-                  title={"DevOps"}
-                  value={devops}
-                  handle={setDevOps}
-                />
-                <CustomCheckbox
-                  title={"A.I. / Machine Learning"}
-                  value={ai}
-                  handle={setAi}
-                />
-                <CustomCheckbox
-                  title={"Cybersecurity"}
-                  value={cybersecurity}
-                  handle={setCybersecurity}
-                />
-                <CustomCheckbox
-                  title={"Gaming"}
-                  value={gaming}
-                  handle={setGaming}
-                />
-                <CustomCheckbox
-                  title={"Mobile Development"}
-                  value={mobileapps}
-                  handle={setMobileapps}
-                />
-              </FormGroup>
-            </Stack>
-          </Container>
-        </Box>
-        <Box
-          sx={{
-            border: 1,
-            marginTop: "1em",
-            marginBottom: "1em",
-            backgroundColor: "primary.dark",
-            borderColor: "secondary.main",
-            borderRadius: 1.5,
-          }}
-        >
-          <Typography
-            variant="h5"
-            align="center"
-            color="secondary.main"
-            paragraph
-          >
-            Languages
-          </Typography>
-          <Container maxWidth="lg">
-            <Grid
-              container
-              height="9em"
-              spacing={1}
-              direction="column"
-              marginLeft="0.5em"
-              marginRight="1em"
-              justifyContent="center"
-              alignItems="flex-start"
+            <Typography
+              variant="h5"
+              align="center"
+              color="secondary.main"
+              paragraph
             >
-              <CustomCheckbox title={"C"} value={c} handle={setC} />
-              <CustomCheckbox title={"SQL"} value={sql} handle={setSql} />
-              <CustomCheckbox title={"PHP"} value={php} handle={setPhp} />
-              <CustomCheckbox
-                title={"JavaScript"}
-                value={javascript}
-                handle={setJavascript}
-              />
-              <CustomCheckbox
-                title={"Python"}
-                value={python}
-                handle={setPython}
-              />
-              <CustomCheckbox title={"Ruby"} value={ruby} handle={setRuby} />
-              <CustomCheckbox title={"Bash"} value={bash} handle={setBash} />
-              <CustomCheckbox title={"Java"} value={java} handle={setJava} />
-              <CustomCheckbox title={"Go"} value={go} handle={setGo} />
-              <CustomCheckbox title={"Swift"} value={swift} handle={setSwift} />
-              <CustomCheckbox title={"C#"} value={csharp} handle={setCsharp} />
-              <CustomCheckbox title={"C++"} value={cpp} handle={setCpp} />
-              <CustomCheckbox
-                title={"Kotlin"}
-                value={kotlin}
-                handle={setKotlin}
-              />
-              <CustomCheckbox
-                title={"TypeScript"}
-                value={typescript}
-                handle={setTypescript}
-              />
-            </Grid>
-          </Container>
-        </Box>
-        <Box
-          sx={{
-            border: 1,
-            marginTop: "1em",
-            marginBottom: "1em",
-            backgroundColor: "primary.dark",
-            borderColor: "secondary.main",
-            borderRadius: 1.5,
-          }}
-        >
-          <Typography
-            variant="h5"
-            align="center"
-            color="secondary.main"
-            paragraph
+              Developer Type
+            </Typography>
+            <Container maxWidth="lg">
+              <Stack direction="row" spacing={2} justifyContent="center">
+                <FormGroup>
+                  <CustomCheckbox
+                    title={"Backend Development"}
+                    value={backend}
+                    handle={setBackend}
+                  />
+                  <CustomCheckbox
+                    title={"Frontend Development"}
+                    value={frontend}
+                    handle={setFrontend}
+                  />
+                  <CustomCheckbox
+                    title={"Backend"}
+                    value={desktopapps}
+                    handle={setDesktopapps}
+                  />
+                  <CustomCheckbox
+                    title={"Desktop Apps"}
+                    value={backend}
+                    handle={setBackend}
+                  />
+                  <CustomCheckbox
+                    title={"Business Intelligence"}
+                    value={bi}
+                    handle={setBi}
+                  />
+                  <CustomCheckbox
+                    title={"Embedded Systems"}
+                    value={embedded}
+                    handle={setEmbedded}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <CustomCheckbox
+                    title={"DevOps"}
+                    value={devops}
+                    handle={setDevOps}
+                  />
+                  <CustomCheckbox
+                    title={"A.I. / Machine Learning"}
+                    value={ai}
+                    handle={setAi}
+                  />
+                  <CustomCheckbox
+                    title={"Cybersecurity"}
+                    value={cybersecurity}
+                    handle={setCybersecurity}
+                  />
+                  <CustomCheckbox
+                    title={"Gaming"}
+                    value={gaming}
+                    handle={setGaming}
+                  />
+                  <CustomCheckbox
+                    title={"Mobile Development"}
+                    value={mobileapps}
+                    handle={setMobileapps}
+                  />
+                </FormGroup>
+              </Stack>
+            </Container>
+          </Box>
+          <Box // Languages
+            sx={{
+              height: "300px",
+              width: "45%",
+              minWidth: "400px",
+              border: 1,
+              marginTop: "1em",
+              backgroundColor: "primary.dark",
+              borderColor: "secondary.main",
+              borderRadius: 1.5,
+            }}
           >
-            Personal Profile
-          </Typography>
-          <Container maxWidth="lg">
-            <Grid
-              container
-              height="18em"
-              spacing={1}
-              direction="column"
-              marginLeft="0.5em"
-              marginRight="1em"
-              justifyContent="center"
-              alignItems="flex-start"
+            <Typography
+              variant="h5"
+              align="center"
+              color="secondary.main"
+              paragraph
             >
-              <CustomCheckbox
-                title={"Supervisor"}
-                subtitle={"Do you supervise others?"}
-                value={supervisor}
-                handle={setSupervisor}
-              />
-              <CustomCheckbox
-                title={"Relevant Studies"}
-                subtitle={"Are your studies relevant?"}
-                value={relevantStudies}
-                handle={setRelevantStudies}
-              />
-              <CustomCheckbox
-                title={"Personal Projects"}
-                subtitle={"Have you worked on personal projects?"}
-                value={personalProjects}
-                handle={setPersonalProjects}
-              />
-            </Grid>
-          </Container>
-        </Box>
+              Languages
+            </Typography>
+            <Container maxWidth="lg">
+              <Grid
+                container
+                height="15em"
+                spacing={1}
+                direction="column"
+                marginLeft="0.5em"
+                marginRight="1em"
+                justifyContent="center"
+                alignItems="flex-start"
+              >
+                <CustomCheckbox title={"C"} value={c} handle={setC} />
+                <CustomCheckbox title={"SQL"} value={sql} handle={setSql} />
+                <CustomCheckbox title={"PHP"} value={php} handle={setPhp} />
+                <CustomCheckbox
+                  title={"JavaScript"}
+                  value={javascript}
+                  handle={setJavascript}
+                />
+                <CustomCheckbox
+                  title={"Python"}
+                  value={python}
+                  handle={setPython}
+                />
+                <CustomCheckbox title={"Ruby"} value={ruby} handle={setRuby} />
+                <CustomCheckbox title={"Bash"} value={bash} handle={setBash} />
+                <CustomCheckbox title={"Java"} value={java} handle={setJava} />
+                <CustomCheckbox title={"Go"} value={go} handle={setGo} />
+                <CustomCheckbox
+                  title={"Swift"}
+                  value={swift}
+                  handle={setSwift}
+                />
+                <CustomCheckbox
+                  title={"C#"}
+                  value={csharp}
+                  handle={setCsharp}
+                />
+                <CustomCheckbox title={"C++"} value={cpp} handle={setCpp} />
+                <CustomCheckbox
+                  title={"Kotlin"}
+                  value={kotlin}
+                  handle={setKotlin}
+                />
+                <CustomCheckbox
+                  title={"TypeScript"}
+                  value={typescript}
+                  handle={setTypescript}
+                />
+              </Grid>
+            </Container>
+          </Box>
+          <Box // Personal Profile
+            sx={{
+              border: 1,
+              height: "100%",
+              width: "45%",
+              minWidth: "400px",
+              marginTop: "1em",
+              backgroundColor: "primary.dark",
+              borderColor: "secondary.main",
+              borderRadius: 1.5,
+            }}
+          >
+            <Typography
+              variant="h5"
+              align="center"
+              color="secondary.main"
+              paragraph
+            >
+              Personal Profile
+            </Typography>
+            <Container maxWidth="lg">
+              <Grid
+                container
+                spacing={1}
+                direction="row"
+                marginLeft="0.5em"
+                marginRight="1em"
+                justifyContent="start"
+                alignItems="flex-start"
+              >
+                <CustomSelect
+                  options={[
+                    "None",
+                    "Secondary School",
+                    "Technical School",
+                    "Bachelor's",
+                    "Master's",
+                    "PhD",
+                  ]}
+                  title={"Education Level"}
+                  handle={setEducation}
+                />
+                <Box
+                  sx={{ width: "40vw", maxWidth: "300px" }}
+                  direction="column"
+                >
+                  <CustomCheckbox
+                    title={"Supervisor"}
+                    subtitle={"Do you supervise others?"}
+                    value={supervisor}
+                    handle={setSupervisor}
+                  />
+                  <CustomCheckbox
+                    title={"Relevant Studies"}
+                    subtitle={
+                      "Are your studies relevant to your job description?"
+                    }
+                    value={relevantStudies}
+                    handle={setRelevantStudies}
+                  />
+                  <CustomCheckbox
+                    title={"Personal Projects"}
+                    subtitle={
+                      "Do you display relevant projects in e.g. Github?"
+                    }
+                    value={personalProjects}
+                    handle={setPersonalProjects}
+                  />
+                </Box>
+              </Grid>
+            </Container>
+          </Box>
+          <Box // Company Profile
+            sx={{
+              height: "100%",
+              width: "45%",
+              minWidth: "400px",
+              border: 1,
+              marginTop: "1em",
+              marginBottom: "1em",
+              backgroundColor: "primary.dark",
+              borderColor: "secondary.main",
+              borderRadius: 1.5,
+            }}
+          >
+            <Typography
+              variant="h5"
+              align="center"
+              color="secondary.main"
+              paragraph
+            >
+              Company Profile
+            </Typography>
+            <Container maxWidth="lg">
+              <Grid
+                container
+                spacing={1}
+                direction="row"
+                marginLeft="0.5em"
+                marginRight="1em"
+                justifyContent="space-around"
+                alignItems="flex-start"
+              >
+                <CustomSelect
+                  options={["Company Office", "Work from Home", "Hybrid"]}
+                  title={"Work Location"}
+                  handle={setHybrid}
+                />
+                <CustomSelect
+                  options={[
+                    "Less than 10",
+                    "11 to 50",
+                    "51 to 100",
+                    "101 to 200",
+                    "201 to 500",
+                    "More than 501",
+                  ]}
+                  title={"Company Size"}
+                  handle={setSize}
+                />
+              </Grid>
+            </Container>
+          </Box>
+        </Grid>
 
         <Stack direction="column" spacing={2} justifyContent="center"></Stack>
       </Box>

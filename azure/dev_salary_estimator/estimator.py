@@ -21,12 +21,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     model_input = {
         "years_experience": years_experience,
-        "company_size_xf": "11-50",
-        "education_xf": "Bachelor's",
-        "relevant_xf": "Ναι",
-        "personal_projects_xf": "Ναι",
-        "remote_xf": "Και τα δύο",
-        "supervisor_xf": "Ναι",
+        "company_size_xf": req_body.get("company_size"),
+        "education_xf": req_body.get("education"),
+        "relevant_xf": req_body.get("relevant"),
+        "personal_projects_xf": req_body.get("personal_projects"),
+        "remote_xf": req_body.get("remote"),
+        "supervisor_xf": req_body.get("supervisor"),
         "sex_xf": "Άντρας",
         "devtype_Backend": req_body.get("backend"),
         "devtype_Desktopapps": req_body.get("desktopapps"),
