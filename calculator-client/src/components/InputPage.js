@@ -2,7 +2,7 @@ import * as React from "react";
 import { theme } from "../theme";
 import { StyledTextField } from "../styledComponents/StyledTextField";
 import { server_url } from "../urls";
-import { StyledSwitch } from "../styledComponents/StyledSwitch";
+import CustomCheckbox from "./CustomCheckbox";
 
 import {
   Button,
@@ -12,43 +12,40 @@ import {
   Container,
   ThemeProvider,
   FormGroup,
-  styled,
-  FormControlLabel,
   Typography,
   Grid,
 } from "@mui/material";
 
-const StyledFormControlLabel = styled(FormControlLabel)({
-  color: theme.palette.secondary.main,
-});
-
 export default function DownloadInput(props) {
-  var [yearsExperience, setYearsExperience] = React.useState("");
-  var [backend, setBackend] = React.useState(false);
-  var [desktopapps, setDesktopapps] = React.useState(false);
-  var [devops, setDevOps] = React.useState(false);
-  var [ai, setAi] = React.useState(false);
-  var [bi, setBi] = React.useState(false);
-  var [cybersecurity, setCybersecurity] = React.useState(false);
-  var [embedded, setEmbedded] = React.useState(false);
-  var [gaming, setGaming] = React.useState(false);
-  var [frontend, setFrontend] = React.useState(false);
-  var [mobileapps, setMobileapps] = React.useState(false);
-  var [c, setC] = React.useState(false);
-  var [sql, setSql] = React.useState(false);
-  var [php, setPhp] = React.useState(false);
-  var [javascript, setJavascript] = React.useState(false);
-  var [kotlin, setKotlin] = React.useState(false);
-  var [typescript, setTypescript] = React.useState(false);
-  var [python, setPython] = React.useState(false);
-  var [ruby, setRuby] = React.useState(false);
-  var [bash, setBash] = React.useState(false);
-  var [go, setGo] = React.useState(false);
-  var [java, setJava] = React.useState(false);
-  var [swift, setSwift] = React.useState(false);
-  var [csharp, setCsharp] = React.useState(false);
-  var [cpp, setCpp] = React.useState(false);
-  var [inputErrorMessage, setInputErrorMessage] = React.useState("");
+  const [yearsExperience, setYearsExperience] = React.useState("");
+  const [backend, setBackend] = React.useState(false);
+  const [desktopapps, setDesktopapps] = React.useState(false);
+  const [devops, setDevOps] = React.useState(false);
+  const [ai, setAi] = React.useState(false);
+  const [bi, setBi] = React.useState(false);
+  const [cybersecurity, setCybersecurity] = React.useState(false);
+  const [embedded, setEmbedded] = React.useState(false);
+  const [gaming, setGaming] = React.useState(false);
+  const [frontend, setFrontend] = React.useState(false);
+  const [mobileapps, setMobileapps] = React.useState(false);
+  const [c, setC] = React.useState(false);
+  const [sql, setSql] = React.useState(false);
+  const [php, setPhp] = React.useState(false);
+  const [javascript, setJavascript] = React.useState(false);
+  const [kotlin, setKotlin] = React.useState(false);
+  const [typescript, setTypescript] = React.useState(false);
+  const [python, setPython] = React.useState(false);
+  const [ruby, setRuby] = React.useState(false);
+  const [bash, setBash] = React.useState(false);
+  const [go, setGo] = React.useState(false);
+  const [java, setJava] = React.useState(false);
+  const [swift, setSwift] = React.useState(false);
+  const [csharp, setCsharp] = React.useState(false);
+  const [cpp, setCpp] = React.useState(false);
+  const [relevantStudies, setRelevantStudies] = React.useState(false);
+  const [personalProjects, setPersonalProjects] = React.useState(false);
+  const [supervisor, setSupervisor] = React.useState(false);
+  const [inputErrorMessage, setInputErrorMessage] = React.useState("");
 
   const validateInput = () => {
     if (yearsExperience.trim() === "") {
@@ -59,7 +56,6 @@ export default function DownloadInput(props) {
       return true;
     }
   };
-
   const sendCalculationRequest = () => {
     if (validateInput()) {
       props.setRequestActive(true);
@@ -69,10 +65,10 @@ export default function DownloadInput(props) {
           years_experience: parseInt(yearsExperience),
           company_size: "11-50",
           education: "Bachelor's",
-          relevant: "Ναι",
-          personal_projects: "Ναι",
+          relevant: relevantStudies,
+          personal_projects: personalProjects,
           remote: "Και τα δύο",
-          supervisor: "Ναι",
+          supervisor: supervisor,
           sex: "Άντρας",
           backend: backend,
           desktopapps: desktopapps,
@@ -89,7 +85,7 @@ export default function DownloadInput(props) {
           php: php,
           javascript: javascript,
           kotlin: kotlin,
-          typescript: typescript,
+          typescript: javascript,
           python: python,
           ruby: ruby,
           bash: bash,
@@ -125,7 +121,7 @@ export default function DownloadInput(props) {
           justifyContent="center"
         >
           <StyledTextField
-            error={!(inputErrorMessage === "")}
+            error={inputErrorMessage !== ""}
             inputProps={{ spellCheck: "false" }}
             helperText={inputErrorMessage}
             label="Years of Experience"
@@ -168,63 +164,62 @@ export default function DownloadInput(props) {
           <Container maxWidth="lg">
             <Stack direction="row" spacing={2} justifyContent="center">
               <FormGroup>
-                <StyledFormControlLabel
-                  control={
-                    <StyledSwitch onClick={() => setBackend(!backend)} />
-                  }
-                  label="Backend Development"
+                <CustomCheckbox
+                  title={"Backend Development"}
+                  value={backend}
+                  handle={setBackend}
                 />
-                <StyledFormControlLabel
-                  control={
-                    <StyledSwitch onClick={() => setFrontend(!frontend)} />
-                  }
-                  label="Frontend Development"
+                <CustomCheckbox
+                  title={"Frontend Development"}
+                  value={frontend}
+                  handle={setFrontend}
                 />
-                <StyledFormControlLabel
-                  control={
-                    <StyledSwitch
-                      onClick={() => setDesktopapps(!desktopapps)}
-                    />
-                  }
-                  label="Desktop Apps"
+                <CustomCheckbox
+                  title={"Backend"}
+                  value={desktopapps}
+                  handle={setDesktopapps}
                 />
-                <StyledFormControlLabel
-                  control={<StyledSwitch onClick={() => setBi(!bi)} />}
-                  label="Business Intelligence"
+                <CustomCheckbox
+                  title={"Desktop Apps"}
+                  value={backend}
+                  handle={setBackend}
                 />
-                <StyledFormControlLabel
-                  control={
-                    <StyledSwitch onClick={() => setEmbedded(!embedded)} />
-                  }
-                  label="Embedded Systems"
+                <CustomCheckbox
+                  title={"Business Intelligence"}
+                  value={bi}
+                  handle={setBi}
+                />
+                <CustomCheckbox
+                  title={"Embedded Systems"}
+                  value={embedded}
+                  handle={setEmbedded}
                 />
               </FormGroup>
               <FormGroup>
-                <StyledFormControlLabel
-                  control={<StyledSwitch onClick={() => setDevOps(!devops)} />}
-                  label="DevOps"
+                <CustomCheckbox
+                  title={"DevOps"}
+                  value={devops}
+                  handle={setDevOps}
                 />
-                <StyledFormControlLabel
-                  control={<StyledSwitch onClick={() => setAi(!ai)} />}
-                  label="A.I. / Machine Learning"
+                <CustomCheckbox
+                  title={"A.I. / Machine Learning"}
+                  value={ai}
+                  handle={setAi}
                 />
-                <StyledFormControlLabel
-                  control={
-                    <StyledSwitch
-                      onClick={() => setCybersecurity(!cybersecurity)}
-                    />
-                  }
-                  label="Cybersecurity"
+                <CustomCheckbox
+                  title={"Cybersecurity"}
+                  value={cybersecurity}
+                  handle={setCybersecurity}
                 />
-                <StyledFormControlLabel
-                  control={<StyledSwitch onClick={() => setGaming(!Gamepad)} />}
-                  label="Gaming"
+                <CustomCheckbox
+                  title={"Gaming"}
+                  value={gaming}
+                  handle={setGaming}
                 />
-                <StyledFormControlLabel
-                  control={
-                    <StyledSwitch onClick={() => setMobileapps(!mobileapps)} />
-                  }
-                  label="Mobile Development"
+                <CustomCheckbox
+                  title={"Mobile Development"}
+                  value={mobileapps}
+                  handle={setMobileapps}
                 />
               </FormGroup>
             </Stack>
@@ -251,6 +246,68 @@ export default function DownloadInput(props) {
           <Container maxWidth="lg">
             <Grid
               container
+              height="9em"
+              spacing={1}
+              direction="column"
+              marginLeft="0.5em"
+              marginRight="1em"
+              justifyContent="center"
+              alignItems="flex-start"
+            >
+              <CustomCheckbox title={"C"} value={c} handle={setC} />
+              <CustomCheckbox title={"SQL"} value={sql} handle={setSql} />
+              <CustomCheckbox title={"PHP"} value={php} handle={setPhp} />
+              <CustomCheckbox
+                title={"JavaScript"}
+                value={javascript}
+                handle={setJavascript}
+              />
+              <CustomCheckbox
+                title={"Python"}
+                value={python}
+                handle={setPython}
+              />
+              <CustomCheckbox title={"Ruby"} value={ruby} handle={setRuby} />
+              <CustomCheckbox title={"Bash"} value={bash} handle={setBash} />
+              <CustomCheckbox title={"Java"} value={java} handle={setJava} />
+              <CustomCheckbox title={"Go"} value={go} handle={setGo} />
+              <CustomCheckbox title={"Swift"} value={swift} handle={setSwift} />
+              <CustomCheckbox title={"C#"} value={csharp} handle={setCsharp} />
+              <CustomCheckbox title={"C++"} value={cpp} handle={setCpp} />
+              <CustomCheckbox
+                title={"Kotlin"}
+                value={kotlin}
+                handle={setKotlin}
+              />
+              <CustomCheckbox
+                title={"TypeScript"}
+                value={typescript}
+                handle={setTypescript}
+              />
+            </Grid>
+          </Container>
+        </Box>
+        <Box
+          sx={{
+            border: 1,
+            marginTop: "1em",
+            marginBottom: "1em",
+            backgroundColor: "primary.dark",
+            borderColor: "secondary.main",
+            borderRadius: 1.5,
+          }}
+        >
+          <Typography
+            variant="h5"
+            align="center"
+            color="secondary.main"
+            paragraph
+          >
+            Personal Profile
+          </Typography>
+          <Container maxWidth="lg">
+            <Grid
+              container
               height="18em"
               spacing={1}
               direction="column"
@@ -259,69 +316,28 @@ export default function DownloadInput(props) {
               justifyContent="center"
               alignItems="flex-start"
             >
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setC(!c)} />}
-                label="C"
+              <CustomCheckbox
+                title={"Supervisor"}
+                subtitle={"Do you supervise others?"}
+                value={supervisor}
+                handle={setSupervisor}
               />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setSql(!sql)} />}
-                label="SQL"
+              <CustomCheckbox
+                title={"Relevant Studies"}
+                subtitle={"Are your studies relevant?"}
+                value={relevantStudies}
+                handle={setRelevantStudies}
               />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setPhp(!php)} />}
-                label="PHP"
-              />
-              <StyledFormControlLabel
-                control={
-                  <StyledSwitch onClick={() => setJavascript(!javascript)} />
-                }
-                label="JavaScript"
-              />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setKotlin(!kotlin)} />}
-                label="Kotlin"
-              />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setPython(!python)} />}
-                label="Python"
-              />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setRuby(!ruby)} />}
-                label="Ruby"
-              />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setBash(!bash)} />}
-                label="Bash"
-              />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setGo(!go)} />}
-                label="Go"
-              />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setJava(!java)} />}
-                label="Java"
-              />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setSwift(!swift)} />}
-                label="Swift"
-              />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setCsharp(!csharp)} />}
-                label="C#"
-              />
-              <StyledFormControlLabel
-                control={<StyledSwitch onClick={() => setCpp(!cpp)} />}
-                label="C++"
-              />
-              <StyledFormControlLabel
-                control={
-                  <StyledSwitch onClick={() => setTypescript(!typescript)} />
-                }
-                label="TypeScript"
+              <CustomCheckbox
+                title={"Personal Projects"}
+                subtitle={"Have you worked on personal projects?"}
+                value={personalProjects}
+                handle={setPersonalProjects}
               />
             </Grid>
           </Container>
         </Box>
+
         <Stack direction="column" spacing={2} justifyContent="center"></Stack>
       </Box>
     </ThemeProvider>

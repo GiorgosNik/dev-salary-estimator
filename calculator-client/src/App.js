@@ -13,9 +13,9 @@ import {
 } from "@mui/material";
 
 export default function DownloadPage() {
-  var [requestActive, setRequestActive] = React.useState(false);
-  var [responseReceived, setResponseReceived] = React.useState(false);
-  var [result, setResult] = React.useState(0);
+  const [requestActive, setRequestActive] = React.useState(false);
+  const [responseReceived, setResponseReceived] = React.useState(false);
+  const [result, setResult] = React.useState(0);
 
   return (
     <ThemeProvider theme={theme}>
